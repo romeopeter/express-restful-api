@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 const date = dayjs();
 const log = logger({
-    prettyPring: true,
+    prettyPrint: true,
     base: {
         pid: false,
     },
