@@ -1,7 +1,7 @@
 import { AnyZodObject } from "zod";
 import { Request, Response, NextFunction } from "express";
 
-export default function validate(schema: AnyZodObject) {
+export default function validateResource(schema: AnyZodObject) {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
       schema.parse({
@@ -9,8 +9,10 @@ export default function validate(schema: AnyZodObject) {
         query: req.query,
         params: req.params,
       });
+
+      next();
     } catch (e: any) {
-      res.sendStatus(400).send(e.errors);
+      return res.sendStatus(400).send(e.errors);
     }
   };
 }
