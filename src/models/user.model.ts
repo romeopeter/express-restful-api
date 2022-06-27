@@ -24,8 +24,8 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true}
 },{timestamps: true})
 
-userSchema.pre("save", async (next: HookNextFunction) => {
-    const user = this as unknown as userDocument;
+userSchema.pre("save", async function (next: HookNextFunction) {
+    const user = this as userDocument;
 
     if (!user.isModified("password")) return next();
 
@@ -38,8 +38,8 @@ userSchema.pre("save", async (next: HookNextFunction) => {
 });
 
 // Compare password to verify hash
-userSchema.methods.comparePassword = async (candidatePassword: string): Promise<boolean> => {
-    const user = this as unknown as userDocument;
+userSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
+    const user = this as userDocument;
 
     return bcrypt.compare(candidatePassword, user.password).catch(e => false);
 } 
