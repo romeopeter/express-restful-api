@@ -8,4 +8,5 @@
 Technologies
 - NodeJS (ExpressJS)
 - TypeScript
+- Zod
 - Jest
